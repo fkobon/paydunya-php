@@ -1,4 +1,4 @@
-# PAYDUNYA - Client PHP API
+PAYDUNYA - Client PHP API
 ============================
 PAYDUNYA Client PHP
 
