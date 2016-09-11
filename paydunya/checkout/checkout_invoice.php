@@ -7,6 +7,7 @@ class Paydunya_Checkout_Invoice extends Paydunya_Checkout {
   protected $currency = "fcfa";
   protected $cancel_url;
   protected $return_url;
+  protected $callback_url;
   protected $invoice_url;
   protected $custom_data;
   protected $receipt_url;
@@ -16,6 +17,7 @@ class Paydunya_Checkout_Invoice extends Paydunya_Checkout {
   function __construct(){
     $this->cancel_url = Paydunya_Checkout_Store::getCancelUrl();
     $this->return_url = Paydunya_Checkout_Store::getReturnUrl();
+    $this->callback_url = Paydunya_Checkout_Store::getCallbackUrl();
     $this->custom_data = new Paydunya_CustomData();
   }
 
@@ -54,6 +56,12 @@ class Paydunya_Checkout_Invoice extends Paydunya_Checkout {
   public function setReturnUrl($url) {
     if(filter_var($url, FILTER_VALIDATE_URL)){
       $this->return_url = $url;
+    }
+  }
+
+  public function setCallbackUrl($url) {
+    if(filter_var($url, FILTER_VALIDATE_URL)){
+      $this->callback_url = $url;
     }
   }
 
@@ -167,7 +175,8 @@ class Paydunya_Checkout_Invoice extends Paydunya_Checkout {
       'custom_data' => $this->showCustomData(),
       'actions' => array(
         'cancel_url' => $this->cancel_url,
-        'return_url' => $this->return_url
+        'return_url' => $this->return_url,
+        'callback_url' => $this->callback_url
       )
     );
 

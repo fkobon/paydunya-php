@@ -8,6 +8,7 @@ class Paydunya_Checkout_Store extends Paydunya {
   private static $logoUrl;
   private static $cancelUrl;
   private static $returnUrl;
+  private static $callbackUrl;
 
 
   public static function setName($name) {
@@ -50,6 +51,12 @@ class Paydunya_Checkout_Store extends Paydunya {
     }
   }
 
+  public static function setCallbackUrl($url) {
+    if(filter_var($url, FILTER_VALIDATE_URL)){
+      self::$callbackUrl = $url;
+    }
+  }
+
   public static function getName() {
     return self::$name;
   }
@@ -80,5 +87,9 @@ class Paydunya_Checkout_Store extends Paydunya {
 
   public static function getReturnUrl() {
     return self::$returnUrl;
+  }
+
+  public static function getCallbackUrl() {
+    return self::$callbackUrl;
   }
 }
