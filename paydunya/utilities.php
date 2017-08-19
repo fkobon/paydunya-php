@@ -15,11 +15,8 @@ class Paydunya_Utilities {
       'PAYDUNYA-MODE' => Paydunya_Setup::getMode(),
       'User-Agent' => "PAYDUNYA Checkout API PHP client v1 aka Neptune"
     );
-    if (JSON_ENCODE_PARAM_SUPPORT) {
-      $json_payload = json_encode($data,JSON_FORCE_OBJECT);
-    }else{
-      $json_payload = json_encode((object)$data);
-    }
+
+    $json_payload = json_encode($data);
 
     $request = Requests::post($url, $headers,$json_payload,array('timeout' => 10));
 

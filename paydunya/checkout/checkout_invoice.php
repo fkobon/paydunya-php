@@ -4,6 +4,7 @@ class Paydunya_Checkout_Invoice extends Paydunya_Checkout {
   protected $items = array();
   protected $total_amount = 0.0;
   protected $taxes = array();
+  protected $channels = array();
   protected $currency = "fcfa";
   protected $cancel_url;
   protected $return_url;
@@ -33,6 +34,18 @@ class Paydunya_Checkout_Invoice extends Paydunya_Checkout {
 
   public function pushItems($data=array()) {
     $this->items = $data;
+  }
+
+  public function addChannel($channelSlug) {
+    $this->channels[] = $channelSlug;
+  }
+
+  public function addChannels($channels = array()) {
+    $this->pushChannels($channels);
+  }
+
+  public function pushChannels($channels = array()) {
+    $this->channels = $channels;
   }
 
   public function pushTaxes($data=array()) {
@@ -162,7 +175,8 @@ class Paydunya_Checkout_Invoice extends Paydunya_Checkout {
         'items' => $this->items,
         'taxes' => $this->taxes,
         'total_amount' => $this->getTotalAmount(),
-        'description' => $this->getDescription()
+        'description' => $this->getDescription(),
+        'channels' => $this->channels
       ),
       'store' => array(
         'name' => Paydunya_Checkout_Store::getName(),
